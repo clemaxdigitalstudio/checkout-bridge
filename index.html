@@ -25,7 +25,7 @@
   var SHOP = "https://www.etsy.com/shop/ClemaxDigitalStudio";
   var params = new URLSearchParams(window.location.search);
   var raw = params.get("products") || params.get("product_id") || params.get("productId") || params.get("items") || "";
-  var first = raw.split(",")[0].trim();
+  var first = raw.split(",")[0].split(":")[0].trim();
   var target = SHOP;
   if (/^\d{6,}$/.test(first)) {
     target = "https://www.etsy.com/listing/" + first;
@@ -34,10 +34,3 @@
   var coupon = params.get("coupon");
   if (coupon && target === SHOP) {
     target = "https://clemaxdigitalstudio.etsy.com?coupon=" + encodeURIComponent(coupon);
-  }
-  document.getElementById("go").href = target;
-  setTimeout(function () { window.location.replace(target); }, 700);
-})();
-</script>
-</body>
-</html>
